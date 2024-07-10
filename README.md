@@ -107,3 +107,49 @@ Create the resource with the following command:
 kubectl apply -f echo-api-declarative-1.yaml
 ```
 
+Open APIM Console and check that the new API is there!
+
+## Create an application with GKO
+
+Create a file called `application-1.yaml` and enter the following contents:
+
+```yaml
+apiVersion: gravitee.io/v1alpha1
+kind: Application
+metadata:
+  name: application-1
+spec:
+  contextRef:
+    name: "management-context-1"
+    namespace: "default"
+  name: "My Kubernetes Application 1"
+  type: "WEB"
+  domain: "https://example.com"
+  description: "Application created using GKO"
+  metadata:
+    - name: "test metadata"
+      format: "STRING"
+    - name: "test metadata 2"
+      format: "STRING"
+```
+
+Create the resource with the following command:
+
+```sh
+kubectl apply -f application-1.yaml
+```
+
+Open APIM Console and check that the new application is there!
+
+## Try other examples
+
+There are many other example GKO resources available here: https://github.com/gravitee-io/gravitee-kubernetes-operator/tree/master/examples
+
+Try creating some of these example APIs (v2 and v4), Resources (authentication providers, caches, ...), and Applications. **But remember** to add the following object to the API definition yaml files so that GKO knows which APIM installation to sync the APIs with:
+
+```yaml
+spec:
+  contextRef:
+    name: "management-context-1"
+    namespace: "default"
+```
