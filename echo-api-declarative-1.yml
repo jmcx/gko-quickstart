@@ -8,9 +8,11 @@ spec:
     name: "management-context-1"
     namespace: "default"
   version: "1"
-  state: "STARTED"
+  categories: ["cat1", "cat2"]
+  state: STOPPED
   lifecycle_state: "PUBLISHED"
-  description: "Gravitee Kubernetes Operator sample"
+  description: "This is an API created by the Gravitee Kubernetes Operator"
+  visibility: PUBLIC
   plans:
     - name: "KEY_LESS"
       description: "FREE"
@@ -23,3 +25,4 @@ spec:
           - name: "Default"
             target: "http://gravitee-echo-api.gravitee.svc.cluster.local:80"
   local: false
+  # notifyMembers: true
