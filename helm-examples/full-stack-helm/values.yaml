@@ -1,0 +1,14 @@
+context_name: "context"
+
+api:
+  name: "phrase-api"
+  version: "1.0.0"
+  target: "https://corporatebs-generator.sameerkumar.website/"
+  plan_name: "phrase-plan"
+  resolverParameter: "https://am.gateway.master.gravitee.dev/01jonathanfederation/oidc/.well-known/jwks.json"
+
+application:
+  name: "oauth-phrase-app"
+
+subscription:
+  name: "phrase-api-subscription"

@@ -8,15 +8,16 @@ spec:
     origin: KUBERNETES
     syncFrom: MANAGEMENT
   contextRef: 
-    name: "management-context-1"
-    namespace: "default"
+    name: context
   description: "v4 API with API Key plan and rate limit"
   version: "1.0"
   type: PROXY
+  state: STARTED
+  lifecycleState: PUBLISHED
   listeners:
     - type: HTTP
       paths:
-        - path: "/v4-api-apikey-ratelimit"
+        - path: "/new-path"
       entrypoints:
         - type: http-proxy
           qos: AUTO

@@ -1,0 +1,12 @@
+context_name: "context"
+
+api:
+  name: "phrase-api"
+  version: "1.0.0"
+  target: "https://corporatebs-generator.sameerkumar.website/"
+  
+application:
+  name: "oauth-phrase-app"
+  
+subscription:
+  name: "phrase-api-subscription"

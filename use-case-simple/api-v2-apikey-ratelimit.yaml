@@ -5,10 +5,12 @@ metadata:
 spec:
   name: "v2 API Key rate limit"
   contextRef: 
-    name: "management-context-1"
-    namespace: "default"
+    name: context
   version: "1.0"
-  description: "v2 API with API Key plan and rate limit"
+  state: "STOPPED"
+  lifecycle_state: "UNPUBLISHED"
+  visibility: PUBLIC
+  description: "Updated descritpion"
   plans:
     - name: "KEY_LESS"
       description: "FREE"
@@ -43,3 +45,20 @@ spec:
           - name: "Default"
             target: "https://api.gravitee.io/echo"
   local: false
+  metadata:
+  - key: "build-version"
+    name: "build-version"
+    format: "STRING"
+    value: "0.0.1"
+  pages:
+    markdowns-folder:
+      name: markdowns
+      type: FOLDER  
+    markdown:
+      name: "hello-markdown"
+      type: MARKDOWN
+      parent: markdowns-folder
+      content: |
+        Hello world!
+        --
+        This is markdown.

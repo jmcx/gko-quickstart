@@ -1,0 +1,14 @@
+apiVersion: gravitee.io/v1alpha1
+kind: Application
+metadata:
+  name: oauth-app
+spec:
+  contextRef:
+    name: context
+  name: "K8s OAuth consumer app"
+  description: "This app is used to consume JWT secured APIs"
+  settings:
+    oauth:
+      applicationType: BACKEND_TO_BACKEND
+      grantTypes:
+        - "client_credentials"

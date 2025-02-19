@@ -1,0 +1,39 @@
+apiVersion: gravitee.io/v1alpha1
+kind: ApiV4Definition
+metadata:
+  name: api-v4-kafka
+spec:
+  contextRef:
+    name: "context"
+  name: "api-v4-kafka"
+  description: "V4 Native API managed by Gravitee Kubernetes Operator"
+  version: "1.0"
+  type: NATIVE
+  state: STARTED
+  labels: ["kafka"]
+  listeners:
+    - type: KAFKA
+      host: "gko"
+      port: 9092
+      entrypoints:
+        - type: native-kafka
+  endpointGroups:
+    - name: Default Native endpoint group
+      type: native-kafka
+      sharedConfiguration:
+        security:
+          protocol: PLAINTEXT
+      endpoints:
+        - name: Default Native proxy
+          type: native-kafka
+          inheritConfiguration: true
+          "weight": 1
+          configuration:
+            bootstrapServers: "apim-tools-kafka.apim-tools.svc:9092"
+          secondary: false
+  plans:
+    KeyLess:
+      name: "Free plan"
+      description: "This plan does not require any authentication"
+      security:
+        type: "KEY_LESS"

@@ -1,0 +1,42 @@
+apiVersion: gravitee.io/v1alpha1
+kind: ApiV4Definition
+metadata:
+  name: {{ .Values.api.name }}
+spec:
+  contextRef:
+    name: {{ .Values.context_name }}
+  name: {{ .Values.api.name }}
+  version: {{ .Values.api.version }}
+  type: "PROXY"
+  listeners:
+    - type: "HTTP"
+      paths:
+        - path: {{ .Values.api.name }}
+          overrideAccess: false
+      entrypoints:
+        - type: "http-proxy"
+          qos: "AUTO"
+  endpointGroups:
+    - name: "Default HTTP proxy group"
+      type: "http-proxy"
+      endpoints:
+        - name: "Default HTTP proxy"
+          type: "http-proxy"
+          configuration:
+            target: {{ .Values.api.target }}
+          secondary: false
+          inheritConfiguration: false
+  plans:
+    {{ .Values.api.plan_name }}:
+      name: "JWT plan"
+      security:
+        type: "JWT"
+        configuration:
+          signature: "RSA_RS256"
+          publicKeyResolver: "JWKS_URL"
+          resolverParameter: {{ .Values.api.resolverParameter }}
+          userClaim: "sub"
+      status: "PUBLISHED"
+  flowExecution:
+    mode: "default"
+    matchRequired: false

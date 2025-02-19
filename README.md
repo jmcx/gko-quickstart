@@ -22,6 +22,7 @@ minikube start
 To keep things simple, install GKO in the default namespace with the following command:
 
 ```sh
+helm repo update graviteeio
 helm install graviteeio-gko graviteeio/gko
 ```
 

@@ -1,0 +1,42 @@
+apiVersion: "gravitee.io/v1alpha1"
+kind: "ApiV4Definition"
+metadata:
+  name: "api-v4-jwt"
+spec:
+  contextRef: 
+    name: context
+  name: "api-v4-JWT"
+  version: "1.0.0"
+  type: "PROXY"
+  listeners:
+  - type: "HTTP"
+    paths:
+    - path: "/phrase/"
+      overrideAccess: false
+    entrypoints:
+    - type: "http-proxy"
+      qos: "AUTO"
+  endpointGroups:
+  - name: "Default HTTP proxy group"
+    type: "http-proxy"
+    endpoints:
+    - name: "Default HTTP proxy"
+      type: "http-proxy"
+      configuration:
+        target: "https://corporatebs-generator.sameerkumar.website/"
+      secondary: false
+      inheritConfiguration: false
+  plans:
+    jwt-plan:
+      name: "JWT plan"
+      security:
+        type: "JWT"
+        configuration:
+          signature: "RSA_RS256"
+          publicKeyResolver: "JWKS_URL"
+          resolverParameter: "https://am.gateway.master.gravitee.dev/01jonathanfederation/oidc/.well-known/jwks.json"
+          userClaim: "sub"
+      status: "PUBLISHED"
+  flowExecution:
+    mode: "default"
+    matchRequired: false

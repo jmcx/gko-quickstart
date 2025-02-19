@@ -1,0 +1,17 @@
+#
+apiVersion: gravitee.io/v1alpha1
+kind: Application
+metadata:
+  name: simple-application-with-client-id
+spec:
+  contextRef: 
+    name: context
+  name: "simple-application-with-client-id"
+  domain: "https://example.com"
+  description: |
+    A hands-free application. 
+    Using this type, you will be able to define the client_id by your own.
+  settings:
+    app:
+      type: WEB
+      clientId: "my-client-id"
