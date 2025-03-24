@@ -1,0 +1,48 @@
+apiVersion: gravitee.io/v1alpha1
+kind: ApiV4Definition
+metadata:
+  name: orders-api-spg
+spec:
+  name: "Orders API SPG"
+  contextRef: 
+    name: context
+  description: "v4 API for Orders with a shared policy group"
+  version: "1.0"
+  type: PROXY
+  flows:
+    - name: "default"
+      enabled: true
+      selectors:
+        - type: "HTTP"
+          path: "/"
+          pathOperator: "EQUALS"
+      request:
+        - sharedPolicyGroupRef:
+            name: "simple-shared-policy-group"
+          enabled: true
+  listeners:
+    - type: HTTP
+      paths:
+        - path: "/orders"
+      entrypoints:
+        - type: http-proxy
+          qos: AUTO
+  endpointGroups:
+    - name: Default HTTP proxy group
+      type: http-proxy
+      endpoints:
+        - name: Default HTTP proxy
+          type: http-proxy
+          inheritConfiguration: false
+          configuration:
+            target: https://api.gravitee.io/echo
+          secondary: false
+  flowExecution:
+    mode: DEFAULT
+    matchRequired: false
+  plans:
+    API_KEY:
+      name: "Keyless plan"
+      security:
+        type: "KEY_LESS"
+  

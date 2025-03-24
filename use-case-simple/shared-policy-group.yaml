@@ -1,0 +1,21 @@
+apiVersion: gravitee.io/v1alpha1
+kind: SharedPolicyGroup
+metadata:
+  name: simple-shared-policy-group
+spec:
+  contextRef:
+    name: "context"
+  name: "simple-shared-policy-grous"
+  description: "Simple shared policy group"
+  apiType: "PROXY"
+  phase: "REQUEST"
+  steps:
+    - name: Rate Limit
+      description: k8s rate limit
+      enabled: true
+      policy: rate-limit
+      configuration:
+        rate:
+          periodTime: 20
+          limit: 3
+          periodTimeUnit: SECONDS

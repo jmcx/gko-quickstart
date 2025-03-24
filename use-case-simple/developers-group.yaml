@@ -1,0 +1,15 @@
+apiVersion: gravitee.io/v1alpha1
+kind: Group
+metadata:
+  name: developers
+spec:
+  contextRef:
+    name: "context"
+  name: "developers"
+  members:
+  - source: memory
+    sourceId: jonathanadmin
+    roles:
+      API: OWNER
+      APPLICATION: OWNER
+      INTEGRATION: USER
