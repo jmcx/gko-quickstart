@@ -9,6 +9,8 @@ spec:
   description: "v4 API for Products with a shared policy group"
   version: "1.0"
   type: PROXY
+  groupRefs:
+    - name: developers
   flows:
     - name: "default"
       enabled: true

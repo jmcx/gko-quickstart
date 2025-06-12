@@ -5,7 +5,7 @@ metadata:
 spec:
   contextRef:
     name: "context"
-  name: "simple-shared-policy-grous"
+  name: "simple-shared-policy-group"
   description: "Simple shared policy group"
   apiType: "PROXY"
   phase: "REQUEST"
